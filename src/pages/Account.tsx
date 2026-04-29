@@ -6,5 +6,5 @@ export default function Account() {
         <p>Account page will be implemented in the next phase.</p>
       </div>
     </section>
-  )
+  );
 }

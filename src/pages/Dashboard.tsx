@@ -6,5 +6,5 @@ export default function Dashboard() {
         <p>Dashboard page will be implemented in the next phase.</p>
       </div>
     </section>
-  )
+  );
 }

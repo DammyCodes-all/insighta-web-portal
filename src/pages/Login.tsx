@@ -1,9 +1,9 @@
 export default function Login() {
-  const backendUrl = import.meta.env.VITE_BACKEND_URL
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const handleLogin = () => {
-    window.location.href = `${backendUrl}/api/auth/github`
-  }
+    window.location.href = `${backendUrl}/api/auth/github`;
+  };
 
   return (
     <main className="login-page">
@@ -18,5 +18,5 @@ export default function Login() {
         </button>
       </section>
     </main>
-  )
+  );
 }

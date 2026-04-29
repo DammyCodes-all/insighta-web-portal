@@ -1,11 +1,11 @@
-import { NavLink } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
+import { NavLink } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const navClass = ({ isActive }: { isActive: boolean }) =>
-  isActive ? 'nav-link nav-link--active' : 'nav-link'
+  isActive ? "nav-link nav-link--active" : "nav-link";
 
 export default function Navbar() {
-  const { user } = useAuth()
+  const { user } = useAuth();
 
   return (
     <header className="navbar">
@@ -31,5 +31,5 @@ export default function Navbar() {
 
       <div className="nav-user">@{user?.username}</div>
     </header>
-  )
+  );
 }

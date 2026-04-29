@@ -6,5 +6,5 @@ export default function Search() {
         <p>Search page will be implemented in the next phase.</p>
       </div>
     </section>
-  )
+  );
 }

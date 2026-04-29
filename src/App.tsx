@@ -1,13 +1,13 @@
-import { Navigate, Route, Routes } from 'react-router-dom'
-import Navbar from './components/Navbar'
-import ProtectedRoute from './components/ProtectedRoute'
-import Account from './pages/Account'
-import Dashboard from './pages/Dashboard'
-import Login from './pages/Login'
-import ProfileDetail from './pages/ProfileDetail'
-import ProfilesList from './pages/ProfilesList'
-import Search from './pages/Search'
-import './App.css'
+import { Navigate, Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Account from "./pages/Account";
+import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
+import ProfileDetail from "./pages/ProfileDetail";
+import ProfilesList from "./pages/ProfilesList";
+import Search from "./pages/Search";
+import "./App.css";
 
 function App() {
   return (
@@ -80,7 +80,7 @@ function App() {
       />
       <Route path="/" element={<Navigate to="/dashboard" replace />} />
     </Routes>
-  )
+  );
 }
 
-export default App
+export default App;

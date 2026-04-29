@@ -6,5 +6,5 @@ export default function ProfilesList() {
         <p>Profiles list page will be implemented in the next phase.</p>
       </div>
     </section>
-  )
+  );
 }
