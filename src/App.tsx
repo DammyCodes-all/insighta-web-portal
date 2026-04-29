@@ -7,74 +7,35 @@ import Login from "./pages/Login";
 import ProfileDetail from "./pages/ProfileDetail";
 import ProfilesList from "./pages/ProfilesList";
 import Search from "./pages/Search";
-import "./App.css";
+
+function ProtectedLayout() {
+  return (
+    <div className="min-h-screen p-4 sm:p-5">
+      <div className="mx-auto flex min-h-[calc(100vh-2rem)] max-w-7xl flex-col gap-4 sm:gap-5">
+        <Navbar />
+        <main className="flex-1">
+          <Routes>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/profiles" element={<ProfilesList />} />
+            <Route path="/profiles/:id" element={<ProfileDetail />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/account" element={<Account />} />
+          </Routes>
+        </main>
+      </div>
+    </div>
+  );
+}
 
 function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route
-        path="/dashboard"
+        path="/*"
         element={
           <ProtectedRoute>
-            <div className="app-shell">
-              <Navbar />
-              <main className="content-shell">
-                <Dashboard />
-              </main>
-            </div>
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/profiles"
-        element={
-          <ProtectedRoute>
-            <div className="app-shell">
-              <Navbar />
-              <main className="content-shell">
-                <ProfilesList />
-              </main>
-            </div>
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/profiles/:id"
-        element={
-          <ProtectedRoute>
-            <div className="app-shell">
-              <Navbar />
-              <main className="content-shell">
-                <ProfileDetail />
-              </main>
-            </div>
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/search"
-        element={
-          <ProtectedRoute>
-            <div className="app-shell">
-              <Navbar />
-              <main className="content-shell">
-                <Search />
-              </main>
-            </div>
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/account"
-        element={
-          <ProtectedRoute>
-            <div className="app-shell">
-              <Navbar />
-              <main className="content-shell">
-                <Account />
-              </main>
-            </div>
+            <ProtectedLayout />
           </ProtectedRoute>
         }
       />

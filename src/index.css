@@ -1,10 +1,36 @@
-:root {
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@import "tailwindcss";
 
-body {
-  min-width: 320px;
+@layer base {
+  :root {
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    min-height: 100%;
+    background:
+      radial-gradient(
+        circle at top left,
+        rgba(125, 215, 194, 0.18),
+        transparent 32%
+      ),
+      linear-gradient(180deg, #071018 0%, #09141d 54%, #061019 100%);
+  }
+
+  body {
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+    color: #c7d0d8;
+    background: transparent;
+    font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  }
+
+  button,
+  input,
+  select {
+    font: inherit;
+  }
 }
