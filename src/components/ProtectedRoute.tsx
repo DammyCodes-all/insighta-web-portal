@@ -11,7 +11,7 @@ export default function ProtectedRoute({
 
   if (loading) {
     return (
-      <div className="page-shell page-shell--centered">
+      <div className="grid min-h-screen place-items-center p-6">
         <Spinner />
       </div>
     );
