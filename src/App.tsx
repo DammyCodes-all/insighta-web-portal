@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+import AuthRedirectListener from "./components/AuthRedirectListener";
 import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Account from "./pages/Account";
@@ -30,19 +31,22 @@ function ProtectedLayout() {
 
 function App() {
   return (
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/auth/callback" element={<AuthCallback />} />
-      <Route
-        path="/*"
-        element={
-          <ProtectedRoute>
-            <ProtectedLayout />
-          </ProtectedRoute>
-        }
-      />
-      <Route path="/" element={<Navigate to="/dashboard" replace />} />
-    </Routes>
+    <>
+      <AuthRedirectListener />
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/auth/callback" element={<AuthCallback />} />
+        <Route
+          path="/*"
+          element={
+            <ProtectedRoute>
+              <ProtectedLayout />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+      </Routes>
+    </>
   );
 }
 

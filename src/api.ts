@@ -14,8 +14,11 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
-      window.location.href = "/login";
+    const requestUrl = String(error.config?.url ?? "");
+    const isAuthMeRequest = requestUrl.includes("/auth/me");
+
+    if (error.response?.status === 401 && !isAuthMeRequest) {
+      window.dispatchEvent(new Event("auth:unauthorized"));
     }
 
     return Promise.reject(error);

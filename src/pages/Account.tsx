@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../api";
 import { useAuth } from "../context/AuthContext";
 import { getApiErrorMessage } from "../utils/apiError";
 
 export default function Account() {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
   const [loggingOut, setLoggingOut] = useState(false);
 
@@ -14,7 +16,7 @@ export default function Account() {
 
     try {
       await api.post("/auth/logout");
-      window.location.href = "/login";
+      navigate("/login", { replace: true });
     } catch (caughtError) {
       setError(
         getApiErrorMessage(caughtError, {
