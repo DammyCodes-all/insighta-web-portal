@@ -7,6 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { useLocation } from "react-router-dom";
 import api from "../api";
 
 export interface User {
@@ -28,6 +29,7 @@ const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const { pathname } = useLocation();
 
   const refetch = useCallback(async () => {
     setLoading(true);
@@ -43,8 +45,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
+    if (pathname === "/login" || pathname === "/auth/callback") {
+      setLoading(false);
+      return;
+    }
+
     void refetch();
-  }, [refetch]);
+  }, [pathname, refetch]);
 
   const value = useMemo(
     () => ({ user, loading, refetch }),
