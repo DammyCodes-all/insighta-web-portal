@@ -1,9 +1,14 @@
+import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import Spinner from "../components/Spinner";
 import { useAuth } from "../context/AuthContext";
 
 export default function AuthCallback() {
-  const { user, loading } = useAuth();
+  const { user, loading, refetch } = useAuth();
+
+  useEffect(() => {
+    void refetch();
+  }, [refetch]);
 
   if (loading) {
     return (

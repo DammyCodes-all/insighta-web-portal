@@ -1,5 +1,6 @@
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -28,7 +29,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const refetch = async () => {
+  const refetch = useCallback(async () => {
     setLoading(true);
 
     try {
@@ -39,11 +40,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     void refetch();
-  }, []);
+  }, [refetch]);
 
   const value = useMemo(
     () => ({ user, loading, refetch }),
