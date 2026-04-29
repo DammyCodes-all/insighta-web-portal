@@ -2,7 +2,8 @@ export default function Login() {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const handleLogin = () => {
-    window.location.href = `${backendUrl}/api/auth/github`;
+    const returnTo = encodeURIComponent(`${window.location.origin}/auth/callback`);
+    window.location.href = `${backendUrl}/auth/github?redirect_uri=${returnTo}`;
   };
 
   return (
