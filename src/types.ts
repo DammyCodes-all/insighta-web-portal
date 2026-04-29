@@ -17,3 +17,19 @@ export interface ProfilesMeta {
   limit: number;
   total_pages: number;
 }
+
+export interface PaginationLinks {
+  self: string;
+  next: string | null;
+  prev: string | null;
+}
+
+export type PaginatedResponse<T> = {
+  status: "success" | string;
+  page: number;
+  limit: number;
+  total: number;
+  total_pages: number;
+  links?: PaginationLinks;
+  data: T[];
+};

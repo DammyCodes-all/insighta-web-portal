@@ -19,18 +19,36 @@ export default function Dashboard() {
 
       try {
         const [totalResponse, recentResponse] = await Promise.all([
-          api.get<{ total: number }>("/api/profiles?limit=1"),
-          api.get<{ data: Profile[] }>(
-            "/api/profiles?limit=5&sort_by=created_at&order=desc",
-          ),
+          api.get("/api/profiles?limit=1"),
+          api.get("/api/profiles?limit=5&sort_by=created_at&order=desc"),
         ]);
 
         if (!active) {
           return;
         }
 
-        setTotalProfiles(totalResponse.data.total);
-        setRecentProfiles(recentResponse.data.data ?? []);
+        const totalPayload = totalResponse.data as any;
+        let totalCount: number | null = null;
+
+        if (totalPayload) {
+          if (typeof totalPayload.total === "number") {
+            totalCount = totalPayload.total;
+          } else if (totalPayload.meta?.total) {
+            totalCount = totalPayload.meta.total;
+          } else if (Array.isArray(totalPayload.data)) {
+            totalCount = totalPayload.meta?.total ?? totalPayload.data.length ?? null;
+          }
+        }
+
+        const recentPayload = recentResponse.data as any;
+        const recentArr: Profile[] = Array.isArray(recentPayload?.data)
+          ? recentPayload.data
+          : Array.isArray(recentPayload)
+          ? recentPayload
+          : [];
+
+        setTotalProfiles(totalCount);
+        setRecentProfiles(recentArr ?? []);
       } catch (caughtError) {
         if (!active) {
           return;
