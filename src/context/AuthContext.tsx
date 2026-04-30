@@ -13,10 +13,16 @@ import api from "../api";
 export interface User {
   id: string;
   username: string;
-  email: string;
-  avatarUrl: string;
-  role: "admin" | "analyst";
+  github_id: number;
+  avatar_url: string;
+  role: "admin" | "analyst" | "user";
 }
+
+type ApiResponse<T> = {
+  status: "success" | "error";
+  data?: T;
+  message?: string;
+};
 
 type AuthContextValue = {
   user: User | null;
@@ -35,8 +41,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setLoading(true);
 
     try {
-      const response = await api.get<User>("/auth/me");
-      setUser(response.data);
+      const response = await api.get<ApiResponse<User>>("/auth/me");
+      setUser(response.data.data ?? null);
     } catch {
       setUser(null);
     } finally {

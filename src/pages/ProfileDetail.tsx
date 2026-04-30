@@ -5,6 +5,12 @@ import Spinner from "../components/Spinner";
 import { getApiErrorMessage } from "../utils/apiError";
 import type { Profile } from "../types";
 
+type ApiResponse<T> = {
+  status: "success" | "error";
+  data?: T;
+  message?: string;
+};
+
 export default function ProfileDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -26,13 +32,13 @@ export default function ProfileDetail() {
       setError(null);
 
       try {
-        const response = await api.get<Profile>(`/api/profiles/${id}`);
+        const response = await api.get<ApiResponse<Profile>>(`/api/profiles/${id}`);
 
         if (!active) {
           return;
         }
 
-        setProfile(response.data);
+        setProfile(response.data.data ?? null);
       } catch (caughtError) {
         if (!active) {
           return;

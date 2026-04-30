@@ -44,7 +44,9 @@ export default function Account() {
 
         <div className="mt-6 flex flex-col gap-5 sm:flex-row sm:items-center">
           <img
-            src={user?.avatarUrl}
+            src={
+              user?.avatar_url ?? "https://tamilnaducouncil.ac.in/dummy-avatar/"
+            }
             alt={user?.username ? `${user.username} avatar` : "User avatar"}
             className="h-20 w-20 rounded-3xl border border-white/10 object-cover"
           />
@@ -53,7 +55,9 @@ export default function Account() {
             <p className="text-lg font-semibold text-slate-50">
               @{user?.username}
             </p>
-            <p className="text-sm text-slate-300">{user?.email}</p>
+            <p className="text-sm text-slate-300">
+              GitHub ID: {user?.github_id}
+            </p>
             <span
               className={`inline-flex rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] ${roleStyles}`}
             >
